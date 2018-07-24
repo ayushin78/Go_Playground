@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"fmt" 
 	"strings"
 	"io/ioutil"
@@ -19,9 +20,6 @@ func (d deck) toString() (string) {
 	return strings.Join([]string(d), ",")
 }
 
-func (d deck) saveToFile(fileName string) error{
-	return ioutil.WriteFile(fileName, []byte(d.toString()), 666) 
-}
 func deal (d deck, handsize int) (deck, deck){
 	return d[:handsize],d[handsize:] 
 }
@@ -38,4 +36,18 @@ func newDeck() deck {
 	}
 	
 	return cards
+}
+
+func (d deck) saveToFile(fileName string) error{
+	return ioutil.WriteFile(fileName, []byte(d.toString()), 666) 
+}
+
+func newDeckFromFile(fileName string) deck {
+	bs, err := ioutil.ReadFile(fileName)
+	if(err != nil){
+		fmt.Println("error : ", err)
+		os.Exit(1);
+	}
+	s := strings.Split(string(bs), ",")
+	return deck(s)
 }
