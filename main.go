@@ -1,18 +1,13 @@
 package main
 
-import "fmt"
 
 func main(){
 	cards := newDeck()
-	cards = append(cards, "and Virgin Mojito")	
-	newCards := deck{newCard(), "a deck card"}
-	fmt.Println(cards)
-	fmt.Println(newCards)	
-	for i, card := range cards{
-		fmt.Println(i, card)
-	}
+	
+	cards.saveToFile("my_file")	
+	
+	hand, remainingCards := deal(cards, 5)
+	hand.print()
+	remainingCards.print()
 }
 
-func newCard() string {
-	return "hello of diamonds"
-}
