@@ -38,8 +38,8 @@ func newDeck() deck {
 	return cards
 }
 
-func (d deck) saveToFile(fileName string) error{
-	return ioutil.WriteFile(fileName, []byte(d.toString()), 666) 
+func (d deck) saveDeckToFile(fileName string) error{
+	return ioutil.WriteFile(fileName, []byte(d.toString()), 777) 
 }
 
 func newDeckFromFile(fileName string) deck {
